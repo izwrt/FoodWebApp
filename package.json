@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "parcel": "^2.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "name": "foodapp",
+  "version": "1.0.0",
+  "description": "food web application",
+  "main": "App.js",
+  "devDependencies": {
+    "process": "^0.11.10"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "browserslist": [
+    "last 2 version"
+  ],
+  "author": "ishwar",
+  "license": "ISC"
+}
