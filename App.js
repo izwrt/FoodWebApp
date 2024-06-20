@@ -56,6 +56,15 @@ function Header(){
         <div className="search">Serach</div>
           <div className="res-container">
             <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
+            <RestaurantCard/>
           </div>
       </div>
     )
