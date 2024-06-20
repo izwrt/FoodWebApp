@@ -5,7 +5,7 @@
 node_modules/
 
 # Ignore project-specific exiting files 
-project-texiting-files/
+project-texting-files/
 
 # Ignore distribution files
 dist/
