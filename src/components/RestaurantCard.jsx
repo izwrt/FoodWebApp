@@ -1,7 +1,7 @@
 import { IMG_URL } from "../utils/contant";
 
 const RestaurantCard = (props) => {
-    const {name,cuisines,cloudinaryImageId} = props?.data;
+    const {name,cuisines,cloudinaryImageId,avgRating} = props?.data;
     const {slaString} = props.data.sla;
     return(
       
@@ -11,7 +11,7 @@ const RestaurantCard = (props) => {
         </div>
         <h3>{name}</h3>
         <h5>{cuisines.join(', ')}</h5>
-        <h4>{slaString}<span>{props.data.avgRating} star</span></h4>
+        <h4>{slaString}<span>{avgRating} star</span></h4>
       </div>
     )
   }
