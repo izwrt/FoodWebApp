@@ -25,20 +25,46 @@
     cursor: pointer;
 }
 
+.shimmer-filter-btn{
+    margin-top: 10px;
+    width: 150px;
+    height: 30px;
+    border: none;
+}
+
 .res-container{
     display: flex;
     flex-wrap: wrap;
-    padding:10px 0px;
+    padding:10px 70px;
     justify-content: center;
-    gap:26px;
+    gap:30px;
 }
 
+.shimmer-res-container{
+    display: flex;
+    flex-wrap: wrap;
+    padding:10px 70px;
+    justify-content: center;
+    gap:30px;
+}
+
+
+
 .res-card{
-    width: 200px;
+    width: 250px;
     height: 350px;
     /* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.452); */
     border-radius: 10px;
     overflow: hidden;
+}
+
+.shimmer-res-card{
+    width: 250px;
+    height: 350px;
+    /* box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.452); */
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgb(235, 235, 235);
 }
 
 .res-card:hover{
@@ -47,8 +73,14 @@
 }
 
 .card-img-container{
-    height: 45%;
+    height: 55%;
     overflow: hidden;
+}
+
+.shimmer-card-img-container{
+    height: 55%;
+    overflow: hidden;
+    background-color: rgb(212, 211, 211);
 }
 
 .res-card-img{
@@ -65,7 +97,7 @@ h4 > span {
 
 .res-card {
     opacity: 0;
-    animation: fadeInAnimation 1s ease-in-out forwards;
+    animation: fadeInAnimation 0.4s ease-in-out forwards;
   }
   
   @keyframes fadeInAnimation {
