@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react';
 
 const Body = () => {
 const [cardList, setCardList] = useState([]);
-
+const [searchInput, setSearchInput] = useState("");
+const [searchData, setSearchData] = useState([]);
+ 
 useEffect(()=>{
   fetchData()
 },[]);
@@ -13,13 +15,15 @@ useEffect(()=>{
 const fetchData = async () =>{
   const realData = await fetch(FOOD_API);
   const json = await realData.json();
-  setCardList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-  console.log(json);
+  const restDetails = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+  setCardList(restDetails);
+  setSearchData(restDetails);
+  // console.log(json.data.info);
 };
 
 
 
-// console.log(cardList);
+// console.log(cardList[0].info.name);
     return cardList.length === 0 ? (
       <div className="body">
           <button className="shimmer-filter-btn" ></button>
@@ -31,6 +35,15 @@ const fetchData = async () =>{
     </div>
     ):(
       <div className="body">
+        <input type="text" value={searchInput} onChange = {(e) => {setSearchInput(e.target.value)}}></input>                                 
+        <button onClick={()=>{
+         
+          const searchList = cardList.filter(data =>{
+           return data.info.name.toLowerCase().includes(searchInput.toLowerCase())
+        })
+        setSearchData(searchList);
+        // console.log(flag);
+        }}>Search</button>
         <button className="filter-btn" 
         
         onClick={() =>{
@@ -39,12 +52,13 @@ const fetchData = async () =>{
 
         
           <div className="res-container">
-          
-          {cardList.map((data, index) => 
-          <RestaurantCard key={data.info.id} data={data.info} />
-          
-          )
+                     
+          {
+            searchData.map((data, index) => (
+              <RestaurantCard key={data.info.id} data={data.info} />
+             ))
           }
+
           
           </div>
       </div>
