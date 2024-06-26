@@ -37,17 +37,17 @@ const fetchData = async () =>{
       <div className="body">
         <input type="text" value={searchInput} onChange = {(e) => {setSearchInput(e.target.value)}}></input>                                 
         <button onClick={()=>{
-         
+         console.log("clicked")
           const searchList = cardList.filter(data =>{
            return data.info.name.toLowerCase().includes(searchInput.toLowerCase())
         })
         setSearchData(searchList);
-        // console.log(flag);
         }}>Search</button>
         <button className="filter-btn" 
         
         onClick={() =>{
-          setCardList(cardList.filter(card => card.info.avgRating > 4.4))
+          console.log("clicked top")
+          setSearchData(cardList.filter(card => card.info.avgRating > 4.4))
         }}>Top Rated Restaurant</button>
 
         
