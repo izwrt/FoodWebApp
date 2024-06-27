@@ -5,7 +5,9 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Error from "./components/Error";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RestaurantMenu from "./components/RestaurantMenu";
+
+import { createBrowserRouter, RouterProvider ,Outlet} from "react-router-dom";
 
 
 /**
@@ -27,25 +29,37 @@ const AppLoyout = () => {
     return(
         <div className="app">
             <Header />
-            <Body/>
+            <Outlet/>
         </div>
     )
 }
+
+
 
 const appRouter = createBrowserRouter(
     [
         {
             path:"/",
             element : <AppLoyout />,
+            children:[
+               {
+                    path : "/",
+                    element : <Body /> 
+               },
+               {
+                path : "/contact",
+                element : <Contact />
+                },
+                {
+                    path : "/about",
+                    element : <About />
+                },
+                {
+                    path : "/restaurantMenu",
+                    element : <RestaurantMenu />
+                }
+            ],
             errorElement: <Error />
-        },
-        {
-            path : "/contact",
-            element : <Contact />
-        },
-        {
-            path : "/about",
-            element : <About />
         }
     ]
 )
