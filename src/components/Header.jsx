@@ -8,6 +8,7 @@ function Header(){
   useEffect(()=>{
     console.log("useEffect is triggered.")
   },[loginText]);
+  
     return (
       <div className="header">
         <div className="logo-container">
