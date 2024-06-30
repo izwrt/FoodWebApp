@@ -1,13 +1,9 @@
 import foodLogo from '../../images/food-logo.jpg';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 function Header(){
 
   const [loginText, setLoginText] = useState("Login")
-
-  useEffect(()=>{
-    console.log("useEffect is triggered.")
-  },[loginText]);
   
     return (
       <div className="header">

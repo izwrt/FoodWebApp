@@ -2,7 +2,7 @@ import { IMG_URL } from "../utils/contant";
 
 const RestaurantCard = (props) => {
     const {name,cuisines,cloudinaryImageId,avgRating} = props?.data;
-    const {slaString} = props.data.sla;
+    const {slaString} = props?.data?.sla;
     return(
       
       <div className="res-card">

@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { FOOD_API } from "../utils/contant";
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 const Body = () => {
 const [cardList, setCardList] = useState([]);
@@ -41,6 +42,7 @@ const fetchData = async () =>{
           const searchList = cardList.filter(data =>{
            return data.info.name.toLowerCase().includes(searchInput.toLowerCase())
         })
+        
         setSearchData(searchList);
         }}>Search</button>
         <button className="filter-btn" 
@@ -55,7 +57,7 @@ const fetchData = async () =>{
                      
           {
             searchData.map((data, index) => (
-              <RestaurantCard key={data.info.id} data={data.info} />
+              <Link key={data.info.id} to={`restaurantMenu/${data.info.id}`}><RestaurantCard key={data.info.id} data={data.info} /></Link>
              ))
           }
 
