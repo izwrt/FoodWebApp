@@ -1,9 +1,11 @@
+import AboutClass from "./AboutClass";
+
 const About = () =>{
     return(
-        <div>
-            <h1>its About</h1>
-        </div>
+        <AboutClass name={"ishwar"} data={"Mangalore"} />
     )
 }
+
+
 
 export default About;
