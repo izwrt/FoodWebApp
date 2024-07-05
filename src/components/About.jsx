@@ -2,7 +2,9 @@ import AboutClass from "./AboutClass";
 
 const About = () =>{
     return(
-        <AboutClass name={"ishwar"} data={"Mangalore"} />
+        <div>
+        <AboutClass/>
+        </div>
     )
 }
 
