@@ -12,12 +12,16 @@ class AboutClass extends React.Component {
     }
     async componentDidMount(){
         // console.log("component did mount.")
-        const data = await fetch("https://api.github.com/users/izwrt");
+        const data = await fetch("https://api.github.com/users/benadecta");
+        
         const json = await data.json();
         console.log(json);
         this.setState({userInfo:json})
     }
 
+    componentWillUnmount(){
+        console.log("unmounted....")
+        }
 
     render() {
         const {name,bio,avatar_url} = this.state.userInfo;

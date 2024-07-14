@@ -1,23 +1,14 @@
-import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { MENU_ITEMS } from '../utils/contant';
 import Shimmer from './Shimmer';
-
+import useRestaurantMenu from '../utils/useRestaurantMenu';
+import useOnlineStatus from '../utils/useOnlineStatus';
 
 const RestaurantMenu = () => {
-
-    const [menuItems, setMenuItems] = useState(null);
     const {resId} = useParams();
     
-    useEffect(()=>{
-        (async () =>{
-            const fetcMenu = await fetch(MENU_ITEMS+resId);
+    const menuItems = useRestaurantMenu(resId);
 
-            const menus = await fetcMenu.json();
-            setMenuItems(menus.data.cards);
-            // cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards
-        })();
-    },[])
+  
 
     if(menuItems === null){ 
         return (
@@ -30,13 +21,15 @@ const RestaurantMenu = () => {
         )
     }
  
+     
+
         const {name , avgRating, costForTwoMessage ,sla,cuisines } = menuItems[2]?.card?.card.info;
+  
+        const { itemCards } = menuItems[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
 
-        const itemsCards = menuItems[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards;
+        const itemName = menuItems[4].groupedCard.cardGroupMap.REGULAR.cards[2]?.card?.card?.categories;
 
-        const itemName = menuItems[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.categories;
-
-        console.log(itemsCards)
+        console.log(itemCards)
 
     return(
        <div>
@@ -46,7 +39,7 @@ const RestaurantMenu = () => {
             <h3> {sla.slaString}</h3>
             <h2>Menu</h2>
             <div>
-                {itemsCards.map((mainItems,index) =>{
+                {itemCards.map((mainItems,index) =>{
                     const description = mainItems.card.info.description?.replace(/{/g, '|').replace(/}/g, '|') || 'No description available'
                     return(
                         <ul key={index}>

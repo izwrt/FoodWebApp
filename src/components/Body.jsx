@@ -1,31 +1,30 @@
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { FOOD_API } from "../utils/contant";
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import useRestaurantCard from "../utils/useRestaurantCard";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
-const [cardList, setCardList] = useState([]);
 const [searchInput, setSearchInput] = useState("");
 const [searchData, setSearchData] = useState([]);
  
+const cardList = useRestaurantCard();
+
 useEffect(()=>{
-  fetchData()
-},[]);
-
-const fetchData = async () =>{
-  const realData = await fetch(FOOD_API);
-  const json = await realData.json();
-  const restDetails = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-  setCardList(restDetails);
-  setSearchData(restDetails);
-  // console.log(json.data.info);
-};
+  setSearchData(cardList);
+},[cardList]);
 
 
+const onlineStatus = useOnlineStatus();
 
-// console.log(cardList[0].info.name);
-    return cardList.length === 0 ? (
+if ( onlineStatus === false ) {
+  return (
+    <h1>your not connected to internet ... </h1>
+  )
+}
+
+    return searchData.length === 0  ?(
       <div className="body">
           <button className="shimmer-filter-btn" ></button>
           <div className="shimmer-res-container">
@@ -43,13 +42,15 @@ const fetchData = async () =>{
            return data.info.name.toLowerCase().includes(searchInput.toLowerCase())
         })
         
-        setSearchData(searchList);
+        
+
+        searchData && setSearchData(searchList);
         }}>Search</button>
         <button className="filter-btn" 
         
         onClick={() =>{
           console.log("clicked top")
-          setSearchData(cardList.filter(card => card.info.avgRating > 4.4))
+          setSearchData(cardList.filter(card => card.info.avgRating > 4.2))
         }}>Top Rated Restaurant</button>
 
         
@@ -61,10 +62,11 @@ const fetchData = async () =>{
              ))
           }
 
-          
+        
           </div>
       </div>
     )
+  
   }
 
 
