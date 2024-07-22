@@ -26,35 +26,39 @@ if ( onlineStatus === false ) {
 
     return searchData.length === 0  ?(
       <div className="body">
-          <button className="shimmer-filter-btn" ></button>
+          {/* <button className="shimmer-filter-btn" ></button>
           <div className="shimmer-res-container">
             {[...Array(10)].map((_,i) => 
                 <Shimmer key={i}/>
             )}
-          </div>
+          </div> */}
     </div>
     ):(
-      <div className="body">
-        <input type="text" value={searchInput} onChange = {(e) => {setSearchInput(e.target.value)}}></input>                                 
-        <button onClick={()=>{
-         console.log("clicked")
-          const searchList = cardList.filter(data =>{
-           return data.info.name.toLowerCase().includes(searchInput.toLowerCase())
-        })
-        
-        
+      <div>
+   
+      <div className="flex justify-between px-10 py-5">
+        <div className="flex gap-5">
+            <input className="focus:outline-none px-4 p-1 border-2 border-solid border-gray-400 rounded-xl" type="text" value={searchInput} onChange = {(e) => {setSearchInput(e.target.value)}}></input>  
 
-        searchData && setSearchData(searchList);
-        }}>Search</button>
-        <button className="filter-btn" 
-        
-        onClick={() =>{
-          console.log("clicked top")
-          setSearchData(cardList.filter(card => card.info.avgRating > 4.2))
-        }}>Top Rated Restaurant</button>
+            <button className="px-6 py-1.5 rounded-xl bg-red-400" onClick={()=>{
+            console.log("clicked")
+            const searchList = cardList.filter(data =>{
+            return data.info.name.toLowerCase().includes(searchInput.toLowerCase())
+            })
+            searchData && setSearchData(searchList);
+            }}>Search</button>
+        </div>                               
 
+        <div>
+            <button className="px-6 py-1.5 rounded-xl bg-red-400" 
+              
+              onClick={() =>{
+                setSearchData(cardList.filter(card => card.info.avgRating > 4.4))
+              }}>Top Rated Restaurant</button>
+        </div>
+      </div>
         
-          <div className="res-container">
+          <div className="flex flex-wrap justify-center gap-7">
                      
           {
             searchData.map((data, index) => (
