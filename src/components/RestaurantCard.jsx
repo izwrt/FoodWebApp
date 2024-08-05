@@ -6,7 +6,7 @@ const RestaurantCard = (props) => {
 
     return(
       
-      <div className="m-3 p-0 w-[250px] h-[360px] bg-red-300 rounded-xl overflow-hidden shadow-lg hover:scale-105 duration-200">
+      <div className="m-3 p-0 w-[250px] h-[360px] bg-red-300 rounded-xl overflow-hidden shadow-lg">
         <div className="bg-black h-[200px]">
         <img
         className="w-full h-full object-cover"
@@ -22,6 +22,17 @@ const RestaurantCard = (props) => {
         </div>
       </div>
     )
+  }
+
+  export const modifiedCard = (RestaurantCard) =>{
+    return (props) =>{
+      return(
+        <div className="hover:scale-105 duration-200">
+          <label className="absolute bg-red-400 rounded-sm px-1">Top Selling</label>
+          <RestaurantCard {...props}/>
+        </div>
+      )
+    }
   }
 
   export default RestaurantCard;

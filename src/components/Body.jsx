@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {modifiedCard} from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
@@ -15,6 +15,10 @@ useEffect(()=>{
   setSearchData(cardList);
 },[cardList]);
 
+
+const ModResCard = modifiedCard(RestaurantCard);
+
+console.log("data",cardList);
 
 const onlineStatus = useOnlineStatus();
 
@@ -62,7 +66,13 @@ if ( onlineStatus === false ) {
                      
           {
             searchData.map((data, index) => (
-              <Link key={data.info.id} to={`restaurantMenu/${data.info.id}`}><RestaurantCard key={data.info.id} data={data.info} /></Link>
+              <Link key={data.info.id} to={`restaurantMenu/${data.info.id}`}>
+                {
+                  data.info.avgRating > 4.4 ?
+                  <ModResCard key={data.info.id} data={data.info} /> :
+                  <RestaurantCard key={data.info.id} data={data.info}/>
+                }
+                </Link>
              ))
           }
 

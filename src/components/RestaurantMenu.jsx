@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import Shimmer from './Shimmer';
 import useRestaurantMenu from '../utils/useRestaurantMenu';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import RestuarantCategory from './RestaurantCategory';
 
 const RestaurantMenu = () => {
     const {resId} = useParams();
@@ -29,43 +30,29 @@ const RestaurantMenu = () => {
 
         const itemName = menuItems[4].groupedCard.cardGroupMap.REGULAR.cards[2]?.card?.card?.categories;
 
-        console.log(itemCards)
+        // console.log(menuItems[4].groupedCardcardGroupMap.REGULAR.cards);
+
+        const filteredCards = menuItems[4].groupedCard.cardGroupMap.REGULAR.cards.filter( (c) =>
+            c.card.card["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        )
+
+
+        console.log(filteredCards);
 
     return(
-       <div>
-            <h1>{name}</h1>
-            <h2>{avgRating} - {costForTwoMessage} </h2>
-            <h3>{cuisines.join(', ')}</h3>
-            <h3> {sla.slaString}</h3>
-            <h2>Menu</h2>
-            <div>
-                {itemCards.map((mainItems,index) =>{
-                    const description = mainItems.card.info.description?.replace(/{/g, '|').replace(/}/g, '|') || 'No description available'
-                    return(
-                        <ul key={index}>
-                            <li>
-                                <div>
-                                    <div>
-                                        <img src=""></img>
-                                        {mainItems.card.info.name} - Rs. {mainItems.card.info.defaultPrice/100 || mainItems.card.info.finalPrice/100 || mainItems.card.info.price/100}
-                                    </div>
-                                    <div>
-                                        {description} 
-                                    </div>
-                                    <br></br>
-                                    {mainItems.card.info.ratings.aggregatedRating.rating && (
-                                    <div>
-                                        {mainItems.card.info.ratings.aggregatedRating.rating} Rating
-                                    </div>
-                                    )}
-                                    <br></br>
-                                    <br></br>
-                                </div>
-                            </li>
-                        </ul>
-                    )
-                })}
-            </div>
+       <div className='text-center'>
+            <h1 className='font-bold mt-6 pb-1 text-2xl'>{name}</h1>
+            <h2>{avgRating} <span className='ml-4'>{costForTwoMessage} </span></h2>
+            <h3 className='text-sm  font-extrabold text-red-400 underline'>{cuisines.join(', ')}</h3>
+            <h3 className='p-2 font-medium text-sm'> {sla.slaString}</h3>
+            <h2 className='font-bold text-3xl mt-8 text-red-400'>Menu</h2>
+
+            {/* categories accordions*/}
+
+            {filteredCards.map(categoryCard => {
+                return <RestuarantCategory data= {categoryCard?.card?.card}/>
+            })}
+
        </div>
     )
 
