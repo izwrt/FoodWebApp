@@ -3,12 +3,14 @@ import Shimmer from './Shimmer';
 import useRestaurantMenu from '../utils/useRestaurantMenu';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import RestuarantCategory from './RestaurantCategory';
+import { useState } from "react"; 
 
 const RestaurantMenu = () => {
     const {resId} = useParams();
     
     const menuItems = useRestaurantMenu(resId);
 
+    const [showItems, setShowItems] =useState(0)
   
 
     if(menuItems === null){ 
@@ -37,7 +39,7 @@ const RestaurantMenu = () => {
         )
 
 
-        console.log(filteredCards);
+        // console.log(filteredCards);
 
     return(
        <div className='text-center'>
@@ -49,8 +51,9 @@ const RestaurantMenu = () => {
 
             {/* categories accordions*/}
 
-            {filteredCards.map(categoryCard => {
-                return <RestuarantCategory data= {categoryCard?.card?.card}/>
+            {filteredCards.map((categoryCard,index) => {
+                // console.log(index)
+                return <RestuarantCategory key={categoryCard?.card?.card.title} data= {categoryCard?.card?.card} showItems={index === showItems ? true : false} setShowItems = {() => setShowItems(index === showItems ? null : index)} />
             })}
 
        </div>

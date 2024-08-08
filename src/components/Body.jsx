@@ -18,7 +18,7 @@ useEffect(()=>{
 
 const ModResCard = modifiedCard(RestaurantCard);
 
-console.log("data",cardList);
+// console.log("data",cardList);
 
 const onlineStatus = useOnlineStatus();
 
@@ -40,7 +40,7 @@ if ( onlineStatus === false ) {
     ):(
       <div>
    
-      <div className="flex justify-between px-10 py-5">
+      <div className="flex justify-between px-[7.3%] py-5">
         <div className="flex gap-5">
             <input className="focus:outline-none px-4 p-1 border-2 border-solid border-gray-400 rounded-xl" type="text" value={searchInput} onChange = {(e) => {setSearchInput(e.target.value)}}></input>  
 
@@ -62,7 +62,7 @@ if ( onlineStatus === false ) {
         </div>
       </div>
         
-          <div className="flex flex-wrap justify-center gap-7">
+          <div className="flex flex-wrap px-[5%] justify-center gap-7">
                      
           {
             searchData.map((data, index) => (
