@@ -1,8 +1,15 @@
 import foodLogo from '../../images/food-logo.jpg';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/userContext';
+
+
 function Header(){
+
+const {userName} = useContext(UserContext);
+
+
 
   const [loginText, setLoginText] = useState("Login")
   const onlineStatus = useOnlineStatus();
@@ -14,12 +21,14 @@ function Header(){
         </div>
         <div className="flex items-center">
           <ul className='flex p-4'>
-            <li className='px-5'>Online Status : { onlineStatus ? "🟢" : "🟤" }</li>
+            <li className='px-5'>{ onlineStatus ? "🟢Online" : "🟤Offline" }</li>
             <li className='px-5'><Link to="/">Home</Link></li>
             <li className='px-5'><Link to="/about">About Us</Link></li>
             <li className='px-5'><Link to="/Grocery">Grocery</Link></li>
             <li className='px-5'><Link to="/contact">Contact Us</Link></li>
             <li className='px-5'>Cart</li>
+            {loginText === "Logout" ? <li className='px-5'>{userName}</li> : null}
+            
             <button className="login-btn" onClick ={()=>{loginText === "Login" ? setLoginText("Logout") : setLoginText("Login")}}>{loginText}</button>
           </ul>
         </div>

@@ -3,10 +3,16 @@ import ItemList from "./ItemList";
 
 const RestuarantCategory = ({data ,showItems, setShowItems}) =>{
     // console.log(data.data.itemCards)
-    console.log(showItems)
 
-const handleClick = () =>{
-    setShowItems()
+
+const handleClick = (e) =>{
+    setShowItems();
+    // const scrollObject = e.target.getBoundingClientRect();
+    // console.log(scrollObject);
+    // console.log(window.pageYOffset)
+    window.scrollTo({top : 300})
+
+   
 }
     return (
         <div className="w-6/12 m-auto bg-gray-100 my-5 cursor-pointer  rounded-sm shadow-sm" onClick={handleClick}>
